@@ -1,14 +1,9 @@
-import colors from 'vuetify/es5/util/colors'
-
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    titleTemplate: '%s - VH7',
     title: 'VH7',
+    titleTemplate: '%s - VH7',
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: '' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
@@ -41,7 +36,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/auth-next'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
@@ -72,5 +68,50 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+  },
+
+  auth: {
+    strategies: {
+      local: {
+        // grantType: 'password',
+        token: {
+          property: 'access_token'
+        },
+        endpoints: {
+          login: { url: '/token', method: 'post' },
+          logout: false,
+          user: { url: '/users/me', method: 'get' }
+        },
+        user: {
+          property: false,
+          autoFetch: true
+        }
+      }
+    }
+  },
+
+  pwa: {
+    icon: {
+      fileName: 'icon.png'
+    },
+    meta: {
+      mobileApp: true,
+      mobileAppIOS: true,
+      appleStatusBarStyle: 'black-translucent',
+      name: 'VH7',
+      theme_color: '#35dde8',
+      ogType: 'website',
+      ogHost: 'https://vh7.uk',
+      ogImage: '/img/meta.png',
+      ogUrl: 'https://vh7.uk',
+      twitterCard: 'summary_large_image',
+      twitterSite: 'https://vh7.uk',
+      twitterCreator: '@_jakewalker1'
+    },
+    manifest: {
+      name: 'VH7',
+      short_name: 'VH7',
+      background_color: '#121212'
+    }
   }
 }

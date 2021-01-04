@@ -1,75 +1,80 @@
 <template>
   <div>
-    <v-row justify="center" align="center">
-      <v-col cols="12" md="8">
-        <v-card :loading="loading">
-          <template slot="progress">
-            <v-progress-linear :indeterminate="loadingProgress <= 0" :value="loadingProgress" />
-          </template>
-          <v-tabs v-model="tab" fixed-tabs>
-            <v-tab v-for="t in tabs" :key="t" :disabled="loading">
-              {{ t }}
-            </v-tab>
-          </v-tabs>
-          <v-card-text v-if="loading && loadingText" class="text-center body-1" v-text="loadingText" />
-          <v-card-text v-if="result">
-            <v-alert v-model="showResult" :type="result.success ? 'success' : 'error'" dismissible>
-              <div v-if="result.success">
-                Shortened to <b v-text="result.data.link" />!
-              </div>
-              <div v-else>
-                Whoops! There was a problem while processing your request:<br><i v-text="result.data" />
-              </div>
-            </v-alert>
+    <v-alert v-if="!$auth.loggedIn" type="info">
+      Login to save your short links!
+    </v-alert>
+    <v-card v-else outlined class="mb-5">
+      <v-card-title>
+        Welcome back, {{ $auth.user.name || $auth.user.email.split("@")[0] }}!
+      </v-card-title>
+    </v-card>
+
+    <v-card :loading="loading" outlined>
+      <template slot="progress">
+        <v-progress-linear :indeterminate="loadingProgress <= 0" :value="loadingProgress" />
+      </template>
+      <v-tabs v-model="tab" fixed-tabs>
+        <v-tab v-for="t in tabs" :key="t" :disabled="loading">
+          {{ t }}
+        </v-tab>
+      </v-tabs>
+      <v-card-text v-if="loading && loadingText" class="text-center body-1" v-text="loadingText" />
+      <v-card-text v-if="result">
+        <v-alert v-model="showResult" :type="result.success ? 'success' : 'error'" dismissible>
+          <div v-if="result.success">
+            Shortened to <b v-text="result.data.link" />!
+          </div>
+          <div v-else>
+            Whoops! There was a problem while processing your request:<br><i v-text="result.data" />
+          </div>
+        </v-alert>
+      </v-card-text>
+      <v-tabs-items v-if="!loading" v-model="tab">
+        <v-tab-item>
+          <v-card-text>
+            <v-text-field v-model="url" outlined label="URL" prepend-icon="mdi-link" required />
           </v-card-text>
-          <v-tabs-items v-if="!loading" v-model="tab">
-            <v-tab-item>
-              <v-card-text>
-                <v-text-field v-model="url" outlined label="URL" prepend-icon="mdi-link" required />
-              </v-card-text>
-            </v-tab-item>
+        </v-tab-item>
 
-            <v-tab-item>
-              <v-card-text>
-                <v-alert type="info">
-                  Uploaded files will last between 30 and 90 days depending on their size. You can upload a maximum of 256 Mb at a time.
-                </v-alert>
-                <v-file-input v-model="file" outlined prepend-icon="mdi-file" required />
-              </v-card-text>
-            </v-tab-item>
+        <v-tab-item>
+          <v-card-text>
+            <v-alert type="info">
+              Uploaded files will last between 30 and 90 days depending on their size. You can upload a maximum of 256 Mb at a time.
+            </v-alert>
+            <v-file-input v-model="file" outlined prepend-icon="mdi-file" required />
+          </v-card-text>
+        </v-tab-item>
 
-            <v-tab-item>
-              <v-card-text>
-                <v-textarea
-                  v-model="code"
-                  outlined
-                  auto-grow
-                  label="Code"
-                  prepend-icon="mdi-code-tags"
-                  required
-                />
-                <v-select
-                  v-model="language"
-                  outlined
-                  label="Language"
-                  prepend-icon="mdi-format-color-highlight"
-                  :items="languages"
-                  item-text="name"
-                  item-value="id"
-                  required
-                />
-              </v-card-text>
-            </v-tab-item>
-          </v-tabs-items>
-          <v-card-actions>
-            <v-spacer />
-            <v-btn color="primary" :disabled="loading" @click="submit()">
-              Create
-            </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
+        <v-tab-item>
+          <v-card-text>
+            <v-textarea
+              v-model="code"
+              outlined
+              auto-grow
+              label="Code"
+              prepend-icon="mdi-code-tags"
+              required
+            />
+            <v-select
+              v-model="language"
+              outlined
+              label="Language"
+              prepend-icon="mdi-format-color-highlight"
+              :items="languages"
+              item-text="name"
+              item-value="id"
+              required
+            />
+          </v-card-text>
+        </v-tab-item>
+      </v-tabs-items>
+      <v-card-actions>
+        <v-spacer />
+        <v-btn color="primary" :disabled="loading" @click="submit()">
+          Create
+        </v-btn>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -169,6 +174,9 @@ export default Vue.extend({
       this.code = ''
       this.language = ''
     }
+  },
+  head: {
+    title: 'Home'
   }
 })
 </script>

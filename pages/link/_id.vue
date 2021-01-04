@@ -3,7 +3,7 @@
     <v-row justify="center" align="center">
       <v-col cols="12" md="8">
         <v-card v-if="data">
-          <v-card-title class="headline text-capitalize">
+          <v-card-title class="headline">
             {{ title }}
           </v-card-title>
 
@@ -18,9 +18,6 @@
           </v-card-text>
 
           <v-card-text v-if="data.paste" class="body-1">
-            <p class="text-capitalize">
-              {{ data.paste.language }} Code:
-            </p>
             <!-- TODO: Highlight code -->
             <pre><code>{{ data.paste.code }}</code></pre>
           </v-card-text>
@@ -30,7 +27,7 @@
               <li><b>Type</b>: {{ data.upload.mimetype }}</li>
               <li><b>Filename</b>: {{ data.upload.original_filename }}</li>
               <li><b>Hash</b>: <code>{{ data.upload.hash }}</code></li>
-              <li><b>Expires</b>: {{ data.upload.expires | humanDate }}</li>
+              <li><b>Expires</b>: {{ data.upload.expires | humanDate(true) }}</li>
             </ul>
           </v-card-text>
 
@@ -92,6 +89,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { saveAs } from 'file-saver'
+import { DateTime } from 'luxon';
 
 export default Vue.extend({
   async asyncData ({ $axios, route }) {
@@ -111,11 +109,26 @@ export default Vue.extend({
       if (this.data?.url) {
         return 'Shortened URL'
       } else if (this.data?.paste) {
-        return `${this.data.paste.language} Code`
+        const language = this.data.paste.language.charAt(0).toUpperCase() + this.data.paste.language.slice(1)
+        return `${language} Code`
       } else if (this.data?.upload) {
         return this.data.upload.original_filename
       } else {
-        return 'Unknown'
+        return 'Short Link Not Found'
+      }
+    },
+    description () {
+      if (this.data?.url) {
+        return `A shortened URL to '${this.data.url.url}'`
+      } else if (this.data?.paste) {
+        const language = this.data.paste.language.charAt(0).toUpperCase() + this.data.paste.language.slice(1)
+        const length = this.data.paste.code.split(/\r\n|\r|\n/).length
+        return `A snippet of ${length} lines of ${language} code`
+      } else if (this.data?.upload) {
+        const date = DateTime.fromISO(this.data.upload.expires).toLocaleString()
+        return `An uploaded file '${this.data.upload.original_filename}' which expires ${date}`
+      } else {
+        return 'Short Link Not Found'
       }
     },
     canDownload () {
@@ -159,6 +172,23 @@ export default Vue.extend({
     open () {
       const url = this.data.url.url
       window.location.href = url
+    }
+  },
+  head () {
+    return {
+      title: (this as any).title,
+      meta: [
+        {
+          hid: 'description',
+          name: 'description',
+          content: (this as any).description
+        },
+        {
+          hid: 'og:description',
+          name: 'og:description',
+          content: (this as any).description
+        }
+      ]
     }
   }
 })

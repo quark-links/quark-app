@@ -28,7 +28,8 @@
       "@nuxt/types",
       "@types/vuelidate",
       "@nuxtjs/axios",
-      "@types/luxon"
+      "@types/luxon",
+      "@nuxtjs/auth-next"
     ]
   },
   "exclude": [

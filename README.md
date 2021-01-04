@@ -1,4 +1,6 @@
-# vh7
+# VH7 App
+
+This is the companion web app for [VH7 Server](https://github.com/jake-walker/vh7). Please view the readme for the server for more information on VH7.
 
 ## Build Setup
 
