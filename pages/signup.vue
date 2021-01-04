@@ -34,7 +34,7 @@ export default Vue.extend({
     async signup () {
       try {
         // First, create the account
-        const createResponse = await this.$axios.$post('/user', {
+        await this.$axios.$post('/user', {
           name: this.name,
           email: this.email,
           password: this.password

@@ -7,9 +7,16 @@
             {{ title }}
           </v-card-title>
 
-          <v-card-text v-if="warningText">
+          <v-card-text v-if="warningText && !expired">
             <v-alert type="warning" class="mb-0">
               {{ warningText }}
+            </v-alert>
+          </v-card-text>
+
+          <v-card-text v-if="expired">
+            <v-alert type="info" class="mb-0">
+              This download has expired and no longer exists so you will not be
+              able to download it.
             </v-alert>
           </v-card-text>
 
@@ -55,7 +62,7 @@
           <v-card-actions>
             <v-spacer />
 
-            <v-btn v-if="canDownload" color="primary" @click="download()">
+            <v-btn v-if="canDownload" color="primary" :disabled="expired" @click="download()">
               <v-icon left dark>
                 mdi-download
               </v-icon>
@@ -89,7 +96,7 @@
 <script lang="ts">
 import Vue from 'vue'
 import { saveAs } from 'file-saver'
-import { DateTime } from 'luxon';
+import { DateTime } from 'luxon'
 
 export default Vue.extend({
   async asyncData ({ $axios, route }) {
@@ -132,13 +139,19 @@ export default Vue.extend({
       }
     },
     canDownload () {
-      return this.data?.upload || this.data?.paste
+      return (this.data?.upload || this.data?.paste)
     },
     canCopy () {
       return this.data?.paste
     },
     canOpen () {
       return this.data?.url
+    },
+    expired () {
+      if (!this.data?.upload) { return false }
+      const expiry = DateTime.fromISO(this.data.upload.expires)
+      const now = DateTime.utc()
+      return (now >= expiry)
     },
     warningText () {
       if (this.data?.upload) {
