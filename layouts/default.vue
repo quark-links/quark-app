@@ -2,20 +2,22 @@
   <v-app dark>
     <v-navigation-drawer v-model="drawer" fixed app>
       <template v-slot:prepend>
-        <v-list-item v-if="$auth.loggedIn" two-line>
-          <v-list-item-avatar>
-            <v-avatar color="primary" size="256">
-              {{ avatarInitials }}
-            </v-avatar>
-          </v-list-item-avatar>
+        <client-only>
+          <v-list-item v-if="$auth.loggedIn" two-line>
+            <v-list-item-avatar>
+              <v-avatar color="primary" size="256">
+                {{ avatarInitials }}
+              </v-avatar>
+            </v-list-item-avatar>
 
-          <v-list-item-content>
-            <v-list-item-title>Logged In</v-list-item-title>
-            <v-list-item-subtitle class="text-capitalize">
-              {{ $auth.user.name || $auth.user.email.split("@")[0] }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
+            <v-list-item-content>
+              <v-list-item-title>Logged In</v-list-item-title>
+              <v-list-item-subtitle class="text-capitalize">
+                {{ $auth.user.name || $auth.user.email.split("@")[0] }}
+              </v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </client-only>
       </template>
 
       <v-divider />
