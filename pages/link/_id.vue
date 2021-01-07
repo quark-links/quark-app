@@ -105,7 +105,11 @@ export default Vue.extend({
       const data = await $axios.$get(`/info/${id}`)
       return { data }
     } catch (e) {
-      return { data: null }
+      if (e.response?.status === 404) {
+        return { data: null }
+      }
+
+      throw (e)
     }
   },
   data: () => ({
