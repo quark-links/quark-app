@@ -86,7 +86,6 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  middleware: 'auth',
   async asyncData ({ $axios }) {
     const info = await $axios.$get('/info')
     return { info }
