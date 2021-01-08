@@ -24,7 +24,7 @@
       <v-card-text v-if="result">
         <v-alert v-model="showResult" :type="result.success ? 'success' : 'error'" dismissible>
           <div v-if="result.success">
-            Shortened to <code v-text="result.data.link" />!
+            Shortened to <code>{{ result.data.link | fullUrl }}</code>!
           </div>
           <div v-else>
             Whoops! There was a problem while processing your request:<br><i v-text="result.data" />

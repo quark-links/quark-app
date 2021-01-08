@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import { DateTime } from 'luxon'
+import urljoin from 'url-join'
 
 Vue.filter('humanDate', (date: string, relative = false) => {
   const dt = DateTime.fromISO(date)
@@ -9,4 +10,8 @@ Vue.filter('humanDate', (date: string, relative = false) => {
   }
 
   return dt.toLocaleString()
+})
+
+Vue.filter('fullUrl', (link: string) => {
+  return urljoin(process.env.API_URL || 'https://vh7.uk', link)
 })

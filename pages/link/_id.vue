@@ -55,7 +55,7 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Link</v-list-item-title>
-              <v-list-item-subtitle>{{ data.link }}</v-list-item-subtitle>
+              <v-list-item-subtitle>{{ data.link | fullUrl }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
 
