@@ -7,16 +7,9 @@
             {{ title }}
           </v-card-title>
 
-          <v-card-text v-if="warningText && !expired">
+          <v-card-text v-if="warningText">
             <v-alert type="warning" class="mb-0">
               {{ warningText }}
-            </v-alert>
-          </v-card-text>
-
-          <v-card-text v-if="expired">
-            <v-alert type="info" class="mb-0">
-              This download has expired and no longer exists so you will not be
-              able to download it.
             </v-alert>
           </v-card-text>
 
@@ -25,8 +18,7 @@
           </v-card-text>
 
           <v-card-text v-if="data.paste" class="body-1">
-            <!-- TODO: Highlight code -->
-            <pre><code>{{ data.paste.code }}</code></pre>
+            <highlight-code lang="python" :code="data.paste.code" />
           </v-card-text>
 
           <v-card-text v-if="data.upload" class="body-1">
@@ -34,7 +26,6 @@
               <li><b>Type</b>: {{ data.upload.mimetype }}</li>
               <li><b>Filename</b>: {{ data.upload.original_filename }}</li>
               <li><b>Hash</b>: <code>{{ data.upload.hash }}</code></li>
-              <li><b>Expires</b>: {{ data.upload.expires | humanDate(true) }}</li>
             </ul>
           </v-card-text>
 
@@ -54,6 +45,12 @@
           </v-list-item>
           <v-list-item>
             <v-list-item-content>
+              <v-list-item-title>Expiry</v-list-item-title>
+              <v-list-item-subtitle>{{ data.expiry | humanDate(true) }}</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item>
+            <v-list-item-content>
               <v-list-item-title>Link</v-list-item-title>
               <v-list-item-subtitle>{{ data.link | fullUrl }}</v-list-item-subtitle>
             </v-list-item-content>
@@ -62,7 +59,7 @@
           <v-card-actions>
             <v-spacer />
 
-            <v-btn v-if="canDownload" color="primary" :disabled="expired" @click="download()">
+            <v-btn v-if="canDownload" color="primary" @click="download()">
               <v-icon left dark>
                 mdi-download
               </v-icon>
@@ -87,6 +84,7 @@
 
         <v-alert v-else type="warning">
           The short link <code>{{ $route.params.id }}</code> does not exist.
+          It may have expired.
         </v-alert>
       </v-col>
     </v-row>
@@ -129,18 +127,25 @@ export default Vue.extend({
       }
     },
     description () {
+      let output = ''
       if (this.data?.url) {
-        return `A shortened URL to '${this.data.url.url}'`
+        output = `A shortened URL to '${this.data.url.url}'`
       } else if (this.data?.paste) {
         const language = this.data.paste.language.charAt(0).toUpperCase() + this.data.paste.language.slice(1)
         const length = this.data.paste.code.split(/\r\n|\r|\n/).length
-        return `A snippet of ${length} lines of ${language} code`
+        output = `A snippet of ${length} lines of ${language} code`
       } else if (this.data?.upload) {
-        const date = DateTime.fromISO(this.data.upload.expires).toLocaleString()
-        return `An uploaded file '${this.data.upload.original_filename}' which expires ${date}`
+        output = `An uploaded file '${this.data.upload.original_filename}'`
       } else {
         return 'Short Link Not Found'
       }
+
+      if (this.data.expiry) {
+        const date = DateTime.fromISO(this.data.expiry).toLocaleString()
+        output += ` which expires ${date}`
+      }
+
+      return output
     },
     canDownload () {
       return (this.data?.upload || this.data?.paste)
@@ -150,12 +155,6 @@ export default Vue.extend({
     },
     canOpen () {
       return this.data?.url
-    },
-    expired () {
-      if (!this.data?.upload) { return false }
-      const expiry = DateTime.fromISO(this.data.upload.expires)
-      const now = DateTime.utc()
-      return (now >= expiry)
     },
     warningText () {
       if (this.data?.upload) {
