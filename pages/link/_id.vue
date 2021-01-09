@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-row justify="center" align="center">
       <v-col cols="12" md="8">
         <v-card v-if="data">
@@ -88,7 +88,7 @@
         </v-alert>
       </v-col>
     </v-row>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

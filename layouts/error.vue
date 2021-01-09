@@ -1,12 +1,12 @@
 <template>
-  <div>
+  <v-container>
     <h1 class="headline">
       Whoops! {{ error.statusCode === 404 ? pageNotFound : otherError }}
     </h1>
     <v-btn class="mt-5" color="primary" nuxt to="/">
       Home page
     </v-btn>
-  </div>
+  </v-container>
 </template>
 
 <script>

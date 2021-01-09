@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <client-only>
       <v-alert v-if="!$auth.loggedIn" type="info">
         Login to save your short links!
@@ -77,7 +77,7 @@
         </v-btn>
       </v-card-actions>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

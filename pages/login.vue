@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-alert v-if="errorMessage" type="error">
       {{ errorMessage }}
     </v-alert>
@@ -14,7 +14,7 @@
         Signup
       </v-btn>
     </v-form>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">

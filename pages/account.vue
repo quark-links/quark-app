@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <v-container>
     <v-card outlined>
       <v-card-title class="text-capitalize headline">
         {{ $auth.user.name || $auth.user.email.split("@")[0] }}
@@ -75,7 +75,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script lang="ts">
