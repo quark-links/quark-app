@@ -97,7 +97,7 @@ export default {
     meta: {
       mobileApp: true,
       mobileAppIOS: true,
-      appleStatusBarStyle: 'black-translucent',
+      appleStatusBarStyle: 'black',
       name: 'VH7',
       theme_color: '#35dde8',
       ogType: 'website',
