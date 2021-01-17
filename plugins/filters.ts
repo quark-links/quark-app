@@ -3,6 +3,8 @@ import { DateTime } from 'luxon'
 import urljoin from 'url-join'
 
 Vue.filter('humanDate', (date: string, relative = false) => {
+  if (!date) { return '' }
+
   const dt = DateTime.fromISO(date)
 
   if (relative) {
