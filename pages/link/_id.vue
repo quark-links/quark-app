@@ -18,7 +18,8 @@
           </v-card-text>
 
           <v-card-text v-if="data.paste" class="body-1">
-            <highlight-code lang="python" :code="data.paste.code" />
+            <!-- TODO: Highlight code -->
+            <pre><code>{{ data.paste.code }}</code></pre>
           </v-card-text>
 
           <v-card-text v-if="data.upload" class="body-1">
