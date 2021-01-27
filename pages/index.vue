@@ -101,12 +101,7 @@ export default Vue.extend({
   }),
   methods: {
     copyToClipboard (text: string) {
-      const permissionName = 'clipboard-write' as PermissionName
-      navigator.permissions.query({ name: permissionName }).then((result) => {
-        if (result.state === 'granted' || result.state === 'prompt') {
-          navigator.clipboard.writeText(text)
-        }
-      })
+      navigator.clipboard.writeText(text)
     },
     handleProgress (status: string, progress = -1) {
       let message = status

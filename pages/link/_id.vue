@@ -46,7 +46,12 @@
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title>Expiry</v-list-item-title>
-              <v-list-item-subtitle>{{ data.expiry | humanDate(true) }}</v-list-item-subtitle>
+              <v-list-item-subtitle v-if="data.expiry">
+                {{ data.expiry | humanDate(true) }}
+              </v-list-item-subtitle>
+              <v-list-item-subtitle v-else>
+                No Expiry
+              </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
@@ -170,24 +175,19 @@ export default Vue.extend({
   },
   methods: {
     download () {
-      const name = this.data.link.split('/').slice(-1)[0]
+      const name = this.data.link
       if (this.data?.paste) {
         const blob = new Blob([this.data.paste.code], { type: 'text/plain;charset=utf-8' })
         // TODO: save with correct extension
-        saveAs(blob, `vh7-paste-${name}.txt`)
+        saveAs(blob, `vh7-paste-${name.replace('.', '-')}.txt`)
       } else if (this.data?.upload) {
         const url = new URL(`download/${name}`, process.env.API_URL).href
         window.open(url, '_blank')
       }
     },
     copy () {
-      const permissionName = 'clipboard-write' as PermissionName
       const text = this.data.paste.code
-      navigator.permissions.query({ name: permissionName }).then((result) => {
-        if (result.state === 'granted' || result.state === 'prompt') {
-          navigator.clipboard.writeText(text)
-        }
-      })
+      navigator.clipboard.writeText(text)
     },
     open () {
       const url = this.data.url.url

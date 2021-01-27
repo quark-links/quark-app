@@ -30,8 +30,8 @@
       </v-btn>
     </v-container>
 
-    <v-container class="pa-0">
-      <v-list>
+    <v-container>
+      <v-card outlined>
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title>
@@ -89,7 +89,7 @@
             </v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
-      </v-list>
+      </v-card>
     </v-container>
   </div>
 </template>
