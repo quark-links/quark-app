@@ -30,7 +30,8 @@
       "@nuxtjs/axios",
       "@types/luxon",
       "@nuxtjs/auth-next"
-    ]
+    ],
+    "resolveJsonModule": true
   },
   "exclude": [
     "node_modules",

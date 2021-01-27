@@ -48,6 +48,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Download Languages
+        uses: suisei-cn/actions-download-file@v1
+        with:
+          url: "https://raw.githubusercontent.com/jake-walker/vh7/main/utils/languages.json"
+          target: assets/
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v5.2
         with:

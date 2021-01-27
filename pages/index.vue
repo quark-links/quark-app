@@ -57,7 +57,7 @@
               prepend-icon="mdi-code-tags"
               required
             />
-            <v-select
+            <v-autocomplete
               v-model="language"
               outlined
               label="Language"
@@ -82,6 +82,7 @@
 
 <script lang="ts">
 import Vue from 'vue'
+import languages from '~/assets/languages.json'
 
 export default Vue.extend({
   data: () => ({
@@ -94,13 +95,7 @@ export default Vue.extend({
     file: null as unknown as File,
     code: '',
     language: 'plaintext',
-    languages: [
-      {
-        id: 'plaintext',
-        name: 'Plain Text',
-        filetype: '.txt'
-      }
-    ],
+    languages,
     showResult: false,
     result: null as { data: any, success: boolean } | null
   }),
@@ -174,7 +169,7 @@ export default Vue.extend({
       this.url = ''
       this.file = null as unknown as File
       this.code = ''
-      this.language = ''
+      this.language = 'plaintext'
     }
   },
   head: {

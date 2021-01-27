@@ -18,8 +18,7 @@
           </v-card-text>
 
           <v-card-text v-if="data.paste" class="body-1">
-            <!-- TODO: Highlight code -->
-            <pre><code>{{ data.paste.code }}</code></pre>
+            <highlight-code :lang="highlightLang" :code="data.paste.code" />
           </v-card-text>
 
           <v-card-text v-if="data.upload" class="body-1">
@@ -163,6 +162,10 @@ export default Vue.extend({
       } else {
         return false
       }
+    },
+    highlightLang () {
+      if (!this.data?.paste) { return '' }
+      return this.data.paste.language
     }
   },
   methods: {
