@@ -92,7 +92,7 @@ export default {
         },
         responseType: 'token id_token',
         grantType: 'authorization_code',
-        clientId: '53782b51-f8a4-4525-af2c-6dd3438766ab',
+        clientId: '7fd54664-137e-4906-b2f7-7135a9a4fe10',
         scope: ['openid', 'offline_access']
       }
     }
