@@ -13,7 +13,7 @@
             <v-list-item-content>
               <v-list-item-title>Logged In</v-list-item-title>
               <v-list-item-subtitle class="text-capitalize">
-                {{ $auth.user.name || $auth.user.email.split("@")[0] }}
+                {{ $auth.user.given_name || $auth.user.email.split("@")[0] }}
               </v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -70,8 +70,8 @@ export default {
   },
   computed: {
     avatarInitials () {
-      if (this.$auth.user.name) {
-        return this.$auth.user.name.split(' ').map(x => x[0].toUpperCase()).join('')
+      if (this.$auth.user.given_name) {
+        return this.$auth.user.given_name[0].toUpperCase()
       } else {
         return this.$auth.user.email[0].toUpperCase()
       }

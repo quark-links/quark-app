@@ -73,20 +73,27 @@ export default {
 
   auth: {
     strategies: {
-      local: {
-        // grantType: 'password',
-        token: {
-          property: 'access_token'
-        },
+      oauth: {
+        scheme: 'oauth2',
         endpoints: {
-          login: { url: '/token', method: 'post' },
-          logout: false,
-          user: { url: '/users/me', method: 'get' }
+          authorization: 'https://auth.vh7.uk/oauth2/authorize',
+          token: 'https://auth.vh7.uk/oauth2/token',
+          userInfo: 'https://auth.vh7.uk/oauth2/userinfo',
+          logout: 'https://auth.vh7.uk/oauth2/logout'
         },
-        user: {
-          property: false,
-          autoFetch: true
-        }
+        token: {
+          property: 'access_token',
+          type: 'Bearer',
+          maxAge: 1800
+        },
+        refreshToken: {
+          property: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        responseType: 'token id_token',
+        grantType: 'authorization_code',
+        clientId: '53782b51-f8a4-4525-af2c-6dd3438766ab',
+        scope: ['openid', 'offline_access']
       }
     }
   },

@@ -6,7 +6,7 @@
       </v-alert>
       <v-card v-else outlined class="mb-5">
         <v-card-title>
-          Welcome back, {{ $auth.user.name || $auth.user.email.split("@")[0] }}!
+          Welcome back, {{ $auth.user.given_name || $auth.user.email.split("@")[0] }}!
         </v-card-title>
       </v-card>
     </client-only>
