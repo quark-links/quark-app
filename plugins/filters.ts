@@ -15,5 +15,5 @@ Vue.filter('humanDate', (date: string, relative = false) => {
 })
 
 Vue.filter('fullUrl', (link: string) => {
-  return urljoin(process.env.API_URL || 'https://vh7.uk', link)
+  return urljoin(process.env.API_URL || 'https://quark.example', link)
 })

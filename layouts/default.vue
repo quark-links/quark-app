@@ -65,7 +65,7 @@ export default {
           to: '/about'
         }
       ],
-      title: 'VH7'
+      title: 'Quark'
     }
   },
   computed: {

@@ -163,7 +163,7 @@ export default Vue.extend({
     },
     warningText () {
       if (this.data?.upload) {
-        return 'Files uploaded to VH7 are not checked for viruses, spyware or other potentially unwanted programs. Please be cautious when downloading files from people that you don\'t know!'
+        return 'Files uploaded to Quark are not checked for viruses, spyware or other potentially unwanted programs. Please be cautious when downloading files from people that you don\'t know!'
       } else {
         return false
       }
@@ -179,7 +179,7 @@ export default Vue.extend({
       if (this.data?.paste) {
         const blob = new Blob([this.data.paste.code], { type: 'text/plain;charset=utf-8' })
         // TODO: save with correct extension
-        saveAs(blob, `vh7-paste-${name.replace('.', '-')}.txt`)
+        saveAs(blob, `quark-paste-${name.replace('.', '-')}.txt`)
       } else if (this.data?.upload) {
         const url = new URL(`download/${name}`, process.env.API_URL).href
         window.open(url, '_blank')

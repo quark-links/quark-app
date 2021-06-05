@@ -1,8 +1,8 @@
 export default {
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'VH7',
-    titleTemplate: '%s - VH7',
+    title: 'Quark',
+    titleTemplate: '%s - Quark',
     meta: [
     ],
     link: [
@@ -106,7 +106,7 @@ export default {
       mobileApp: true,
       mobileAppIOS: true,
       appleStatusBarStyle: 'black',
-      name: 'VH7',
+      name: 'Quark',
       theme_color: '#35dde8',
       ogType: 'website',
       ogHost: 'https://vh7.uk',
@@ -117,8 +117,8 @@ export default {
       twitterCreator: '@_jakewalker1'
     },
     manifest: {
-      name: 'VH7',
-      short_name: 'VH7',
+      name: 'Quark',
+      short_name: 'Quark',
       background_color: '#121212'
     }
   }

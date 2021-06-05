@@ -1,7 +1,7 @@
 FROM node:14.8
 
 # Build args for configuring the built client
-ARG API_URL=https://vh7.uk
+ARG API_URL=https://quark.example
 
 # Copy build args to environement variables so they are applied on the server
 ENV API_URL=${API_URL}

@@ -5,28 +5,28 @@
     </div>
 
     <v-container>
-      <h1>VH7</h1>
+      <h1>Quark</h1>
       <p>
         A free and open source URL shortening, file sharing and pastebin service.
       </p>
       <p>
         <ul>
           <li>
-            <b>Free.</b> VH7 is not only free to use on the official instance but is also free to download and run for yourself.
+            <b>Free.</b> Quark is not only free to use on the official instance but is also free to download and run for yourself.
           </li>
           <li>
-            <b>Open Source.</b> All of VH7's source code is available here for the community to take a look under the hood. We also accept community contributions, just open a pull request!
+            <b>Open Source.</b> All of Quark's source code is available here for the community to take a look under the hood. We also accept community contributions, just open a pull request!
           </li>
           <li>
-            <b>Multi-purpose.</b> Unlike other mainstream URL shorteners, VH7 also provides file sharing and a pastebin also with short links.
+            <b>Multi-purpose.</b> Unlike other mainstream URL shorteners, Quark also provides file sharing and a pastebin also with short links.
           </li>
         </ul>
       </p>
-      <v-btn color="accent" href="https://github.com/jake-walker/vh7" target="_blank">
-        VH7 Server Github
+      <v-btn color="accent" href="https://github.com/quark-links/quark-server" target="_blank">
+        Quark Server Github
       </v-btn>
-      <v-btn color="accent" href="https://github.com/jake-walker/vh7-app" target="_blank">
-        VH7 App Github
+      <v-btn color="accent" href="https://github.com/quark-links/quark-app" target="_blank">
+        Quark App Github
       </v-btn>
     </v-container>
 
