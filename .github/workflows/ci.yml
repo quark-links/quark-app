@@ -56,8 +56,8 @@ jobs:
       - name: Build & Push Docker Image
         uses: mr-smithers-excellent/docker-build-push@v5.2
         with:
-          image: docker.pkg.github.com/quark-links/quark-app/app
+          image: ghcr.io/quark-links/app
           tags: latest,v1
-          registry: docker.pkg.github.com
-          username: jakewalker
-          password: ${{ secrets.DOCKER_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
