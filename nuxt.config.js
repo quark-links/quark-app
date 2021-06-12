@@ -43,7 +43,7 @@ export default {
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {
-    baseURL: process.env.API_URL,
+    baseURL: process.env.QUARK_API_URL,
     progress: true,
     retry: true
   },
@@ -76,10 +76,10 @@ export default {
       oauth: {
         scheme: 'oauth2',
         endpoints: {
-          authorization: 'https://auth.vh7.uk/oauth2/authorize',
-          token: 'https://auth.vh7.uk/oauth2/token',
-          userInfo: 'https://auth.vh7.uk/oauth2/userinfo',
-          logout: 'https://auth.vh7.uk/oauth2/logout'
+          authorization: process.env.QUARK_OAUTH__AUTHORIZATION,
+          token: process.env.QUARK_OAUTH__TOKEN,
+          userInfo: process.env.QUARK_OAUTH__USER_INFO,
+          logout: process.env.QUARK_OAUTH__LOGOUT
         },
         token: {
           property: 'access_token',
@@ -92,7 +92,7 @@ export default {
         },
         responseType: 'token id_token',
         grantType: 'authorization_code',
-        clientId: '7fd54664-137e-4906-b2f7-7135a9a4fe10',
+        clientId: process.env.QUARK_OAUTH__CLIENT_ID,
         scope: ['openid', 'offline_access']
       }
     }
@@ -106,19 +106,18 @@ export default {
       mobileApp: true,
       mobileAppIOS: true,
       appleStatusBarStyle: 'black',
-      name: 'Quark',
+      name: process.env.QUARK_INSTANCE__NAME || 'Quark',
       theme_color: '#35dde8',
       ogType: 'website',
-      ogHost: 'https://vh7.uk',
+      ogHost: process.env.QUARK_INSTANCE__URL || 'https://quark.example',
       ogImage: '/img/meta.png',
-      ogUrl: 'https://vh7.uk',
+      ogUrl: process.env.QUARK_INSTANCE__URL || 'https://quark.example',
       twitterCard: 'summary_large_image',
-      twitterSite: 'https://vh7.uk',
-      twitterCreator: '@_jakewalker1'
+      twitterSite: process.env.QUARK_INSTANCE__URL || 'https://quark.example'
     },
     manifest: {
-      name: 'Quark',
-      short_name: 'Quark',
+      name: process.env.QUARK_INSTANCE__NAME || 'Quark',
+      short_name: process.env.QUARK_INSTANCE__NAME || 'Quark',
       background_color: '#121212'
     }
   }
