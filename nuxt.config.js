@@ -10,6 +10,17 @@ export default {
     ]
   },
 
+  env: {
+    QUARK_API_URL: process.env.QUARK_API_URL,
+    QUARK_OAUTH__AUTHORIZATION: process.env.QUARK_OAUTH__AUTHORIZATION,
+    QUARK_OAUTH__TOKEN: process.env.QUARK_OAUTH__TOKEN,
+    QUARK_OAUTH__USER_INFO: process.env.QUARK_OAUTH__USER_INFO,
+    QUARK_OAUTH__LOGOUT: process.env.QUARK_OAUTH__LOGOUT,
+    QUARK_OAUTH__CLIENT_ID: process.env.QUARK_OAUTH__CLIENT_ID,
+    QUARK_INSTANCE__NAME: process.env.QUARK_INSTANCE__NAME,
+    QUARK_INSTANCE__URL: process.env.QUARK_INSTANCE__URL
+  },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
@@ -106,18 +117,18 @@ export default {
       mobileApp: true,
       mobileAppIOS: true,
       appleStatusBarStyle: 'black',
-      name: process.env.QUARK_INSTANCE__NAME || 'Quark',
+      name: process.env.QUARK_INSTANCE__NAME,
       theme_color: '#35dde8',
       ogType: 'website',
-      ogHost: process.env.QUARK_INSTANCE__URL || 'https://quark.example',
+      ogHost: process.env.QUARK_INSTANCE__URL,
       ogImage: '/img/meta.png',
-      ogUrl: process.env.QUARK_INSTANCE__URL || 'https://quark.example',
+      ogUrl: process.env.QUARK_INSTANCE__URL,
       twitterCard: 'summary_large_image',
-      twitterSite: process.env.QUARK_INSTANCE__URL || 'https://quark.example'
+      twitterSite: process.env.QUARK_INSTANCE__URL
     },
     manifest: {
-      name: process.env.QUARK_INSTANCE__NAME || 'Quark',
-      short_name: process.env.QUARK_INSTANCE__NAME || 'Quark',
+      name: process.env.QUARK_INSTANCE__NAME,
+      short_name: process.env.QUARK_INSTANCE__NAME,
       background_color: '#121212'
     }
   }
