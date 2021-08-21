@@ -181,7 +181,7 @@ export default Vue.extend({
         // TODO: save with correct extension
         saveAs(blob, `quark-paste-${name.replace('.', '-')}.txt`)
       } else if (this.data?.upload) {
-        const url = new URL(`download/${name}`, process.env.QUARK_API_URL).href
+        const url = new URL(`dl/${name}`, process.env.QUARK_API_URL).href
         window.open(url, '_blank')
       }
     },
